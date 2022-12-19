@@ -1,6 +1,8 @@
 # 本を通して学んだこと
 
-## 一冊目: 情熱プログラマー
+一日につき一章(長い場合は一節)を読んでいき、その概要や学んだことを書いていく。
 
-This book is for the people who wants to be a programmer.
+## 一冊目: 情熱プログラマー ソフトウェア開発者の幸せな生き方
+
+この本は玄人指向のプログラマになるためには何をすべきかということを伝えてくれる本である。
 See [here](./passionate_programmer.md).
