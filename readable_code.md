@@ -2,7 +2,7 @@
 
 ※ 各章・各節のタイトルは当書からの引用である。
 
-## 1. Code Should Be Easy to Understand
+## Chapter 1. Code Should Be Easy to Understand
 
 ### What Makes Code "Better"? (「いい」コードとは? )
 
@@ -38,7 +38,7 @@
 
 ## Part One. Surface-Level Improvements
 
-### 2. Packing Information into Names ( 名前に情報を詰める )
+## Chapter 2. Packing Information into Names ( 名前に情報を詰める )
 
 > Pack information into your names.
 > [訳] 名前に情報を詰めよ
@@ -150,4 +150,58 @@ DBを利用するかどうかというオプションとしてであれば``--us
 
 クラス名は大文字からはじめ、オブジェクト名は小文字から始める…といった命名規則を使うのも手。
 どういう命名規則にするかは組む人やチームによるが、プロジェクト内では統一すべき。
+
+## Chapter 3. Names That Can't Be Misconstrued ( 誤解されない名前 )
+
+名前を付けるときは誤解されない語を使うべき。
+
+> Actively scrutinize your names by asking yourself, "What other meanings could someone interpret from this name?"
+> [訳] 自発的に「他の人が読んでこの名前から別の意図を解釈されないか」を自問自答していけ
+
+### Example: Filter()
+
+``results = Database.all_objects.filter("year <= 2011")``とした場合、resultsに入っている値がどうなっているか判断がつきづらい。
+「yearは2011を含んでいる」可能性とそうでない可能性の二通りが考えられるため。
+``year <= 2011``を満たしているものだけを抽出している場合は``select()``という名前で、除外する場合は``exlude()``のような名前にすると可読性が上がりやすい。
+
+### Example: Clip(text, length)
+
+``def Clip(text, length):``とした場合、「後ろからlength分、削除する」とも読めるし「length分切り捨てる」とも読める。データをlength分切り捨てる場合は``Trancate(text, length)``の方が合う。
+また、lengthという引数名も「バイト数」なのか「文字数」なのか「単語数」なのかがわかりにくい。
+そのため``length``は``number_of_bytes``のように明確にしたほうがいい。
+
+### Prefer min and max for (Inclusive) Limits
+
+``CART_TOO_BIG_LIMIT = 10``とした場合、``if shopping_cart.num_items() >= CART_TOO_BIG_LIMIT``といったようにCART_TOO_BIG_LIMITを含むかどうかのバグを含みやすい。そこで``MAX_ITEMS_IN_CART``とするとそのバグも見つけやすくなる。
+
+> The clearest way to name a limit is to put max_ or min_ in front of the thing being limited.
+> [訳] 範囲を明確にする名前を付けるには max_ か min_ をその名前の前に付ける。
+
+### Prefer first and last for Inclusive Ranges
+
+(指定の末尾を含めた)配列の範囲を表す場合はstart, end よりも first, last のようなペアで付けた方がいい。
+
+### Prefer begin and end for Inclusive/Exclusive Ranges
+
+たとえば「今月末までのイベント」のようなendを含める・含めないの基準がある場合はbegin/endの方がいい。
+
+### Naming Booleans
+
+``bool read_password = true;``という変数名だと「読むべきパスワード」なのか「すでに読んだパスワード」なのか判別しづらい。そこで``need_password``のように``read``という単語を避けて付けるといい。
+ただし、``disable_ssl``のような否定形の単語を使うのは避けるべき。
+
+### Matching Expectations of Users
+
+ユーザが解釈ミスを起こしかねないような単語を使うべきではない。
+
+#### Example: get*()
+
+よくget～と使うがそれはオブジェクトが管理するデータを取得するだけの処理なので、もしDBから取ってくるといった重たい処理をする場合は``fetch``というようなピンポイントな名前にすべき。
+
+#### Example: list::size()
+
+C++のlist::size()はその都度計算しているらしく、get*()と同様の問題を抱えている。
+
+### Example: Evaluating Multiple Name Candidates
+
 
