@@ -204,4 +204,147 @@ C++のlist::size()はその都度計算しているらしく、get*()と同様�
 
 ### Example: Evaluating Multiple Name Candidates
 
+???
 
+
+## Chapter 4. Aesthetics
+
+### Why Do Aesthetics Matter?
+
+ここでは「インデントがぐちゃぐちゃ」だったりと**単に動けばいい**というコードと意味ごとに整列させたりしたコードを比較して、どちらがいいかをサンプルとしてる。
+
+### Rearrange Line Breaks to Be Consistent and Compact
+
+```Java
+public class PerformanceTester {
+ public static final TcpConnectionSimulator wifi = new TcpConnectionSimulator(
+  500, /* Kbps */
+  80, /* millisecs latency */
+  200, /* jitter */
+  1 /* packet loss % */);
+public static final TcpConnectionSimulator t3_fiber =
+ new TcpConnectionSimulator(
+  45000, /* Kbps */
+  10, /* millisecs latency */
+  0, /* jitter */
+  0 /* packet loss % */);
+public static final TcpConnectionSimulator cell = new TcpConnectionSimulator(
+ 100, /* Kbps */
+ 400, /* millisecs latency */
+ 250, /* jitter */
+ 5 /* packet loss % */);
+}
+```
+
+のようなコードよりも
+
+```Java
+public class PerformanceTester {
+ public static final TcpConnectionSimulator wifi =
+  new TcpConnectionSimulator(
+   500, /* Kbps */
+   80, /* millisecs latency */
+   200, /* jitter */
+   1 /* packet loss % */);
+ public static final TcpConnectionSimulator t3_fiber =
+  new TcpConnectionSimulator(
+   45000, /* Kbps */
+   10, /* millisecs latency */
+   0, /* jitter */
+   0 /* packet loss % */);
+ public static final TcpConnectionSimulator cell =
+  new TcpConnectionSimulator(
+   100, /* Kbps */
+   400, /* millisecs latency */
+   250, /* jitter */
+   5 /* packet loss % */);
+}
+```
+
+のように揃えると可読性が上がりやすい。
+もしくは
+
+```Java
+public class PerformanceTester {
+ // TcpConnectionSimulator(throughput, latency, jitter, packet_loss)
+ // [Kbps] [ms] [ms] [percent]
+ public static final TcpConnectionSimulator wifi =
+  new TcpConnectionSimulator(500, 80, 200, 1);
+ public static final TcpConnectionSimulator t3_fiber =
+  new TcpConnectionSimulator(45000, 10, 0, 0);
+ public static final TcpConnectionSimulator cell =
+  new TcpConnectionSimulator(100, 400, 250, 5);
+}
+```
+
+のようにしてもいい。
+
+### Use Methods to Clean Up Irregularity
+
+テスト時でも関数化するなりして可読性を上げるべき。
+
+### Use Column Alignment When Helpful
+
+```C
+CheckFullName("Doug Adams" , "Mr. Douglas Adams"  , "");
+CheckFullName(" Jake Brown ", "Mr. Jake Brown III", "");
+CheckFullName("No Such Guy" , ""                  , "no match found");
+CheckFullName("John"        , ""                  , "more than one result");
+```
+
+のように行や列で揃えたりしても可読性が上がる。
+
+人によっては好ましくないと感じるらしいが、そこまで問題とはいえない。
+
+### Pick a Meaningful Order, and Use It Consistently
+
+C言語でいう構造体を使う場合のように順番そのものは流れに寄与しないような設定等でも**統一すべき**らしい。
+たとえばWindows APIでのウィンドウクラスの設定時のようなものだ。
+
+アイコン設定 → カーソル設定 → ... という並びならそれを完全固定する。
+ある関数内では a → b → c で、ある関数内では b → a → c のような並びだとわかりにくくなる。
+そのため常に統一させるべき。
+
+### Organize Declarations into Blocks
+
+クラス定義のような場合はコンストラクタ群、ヘルパー群、getter/setter系群...というように種類ごとに書くとわかりやすいらしい。
+
+```C++
+class Test{
+    public:
+        // コンストラクタ群
+        Test();
+        ~Test();
+
+        // ヘルパー
+        static void make_Test();
+
+        // getter/setter
+        int getId( void ) const;
+        //...
+};
+```
+
+### Break Code into "Paragraphs"
+
+「処理Aをする」「処理Bをする」といった段落を作ると可読性があがる。
+
+### Personal Style versus Consistency
+
+```C++
+class Test{
+...
+};
+```
+
+```C++
+class Test
+{
+  ...
+};
+```
+
+上の二つのコードはどちらでも好きな方(規約に違反しない限り)でいいが、常に統一させること。
+
+> Consistent sytle is more important than the "right" style.
+> [訳] 常に同じスタイルでやることは「正しいスタイル」よりも重要である。
