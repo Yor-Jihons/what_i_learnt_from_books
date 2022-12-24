@@ -348,3 +348,83 @@ class Test
 
 > Consistent sytle is more important than the "right" style.
 > [訳] 常に同じスタイルでやることは「正しいスタイル」よりも重要である。
+
+## Chapter 5. Knowing What to Comment
+
+> THe purpose of commenting is to help the reader know as much as the writer did.
+> [訳] コメントを書く目的は書いた人と同じレベルで理解できるようにすることだ。
+
+### What NOT to Comment
+
+関数名やメソッド名等のような読んでわかるものにはコメント文は不要。
+
+> Don't comment on facts that can be derived quickly from the code itself.
+> [訳] コードを読んですぐにわかることはコメントにするな。
+
+#### Don't Comment Just for the Sake of Commenting
+
+不要なコメントはするな。
+
+#### Don't Comment Bad Names - Fix the Names Instead
+
+コメントにするぐらいなら名前を変えろ。
+
+### Recoding Your Thoughts
+
+できる限りコメントにすべきではないが、コメントを付けるのなら『書いた人の考え』がわかるようにすべき。
+
+#### Include "Director Commentary"
+
+いわゆるディレクターコメンタリーと呼ばれる、映画についているもののようなものもいい。
+
+#### Comment the Flaws in Your Code
+
+"ToDo:"や"FixMe:"といった一時的な情報も有用。
+
+よく使われるもの
+
+| Marker | 意味 |
+| ---- | ---- |
+| TODO | まだやっていないこと |
+| FIXME | 問題点がここにあることを示す |
+| HACK | 未確定の解決策 |
+| XXX| 危険な問題があることを示す |
+
+#### Comment on Your Constants
+
+```Python
+NUM_THREADS = 8 # as long as it's >= 2 * num_processors, that's good enough.
+```
+
+といったように定数にもコメントを付けると可読性が上がる。
+
+### Put Yourself in the Reader's Shoes
+
+読む人の立場になって考えてみるとわかるかもしれない…。
+
+#### Anticipating Likely Questions
+
+読む人が感じる可能性がある疑問を先回りしてコメントにすべし。
+
+#### Advertising Likely Pitfalls
+
+> 関数やクラスをドキュメント化する際に「このコードで不思議に思うことはないか? 間違って使われないか?」と自問自答することが良い質問である。
+
+```C
+// Calls an external service to deliver email. (Times out after 1 minute.)
+void SendEmail(string to, string subject, string body);
+```
+
+のようにユーザが陥りそうな穴を先に指摘しておくのもベター。
+
+#### "Big Picture" Comments
+
+概要を書くべき。ドキュメント化を恐れるな。
+
+#### Summary Comments
+
+段落ごとに概要を書け。
+
+### Final Thoughts - Getting Over Writer's Block
+
+コメントは面倒臭がらずに書くべき。
