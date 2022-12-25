@@ -428,3 +428,59 @@ void SendEmail(string to, string subject, string body);
 ### Final Thoughts - Getting Over Writer's Block
 
 コメントは面倒臭がらずに書くべき。
+
+## Chapter 6. Making Comments Precise and Compact
+
+> Comments should have a high information-to-space ratio.
+> [訳] コメントは高い空間的情報量を持つべきである。
+
+つまり、コメントは「読みやすく、理解できるものであるべき」ということだ。
+
+### Keep Comments Compact
+
+```C++
+// The int is the CategoryType.
+// The first float in the inner pair is the 'score',
+// the second is the 'weight'.
+typedef hash_map<int, pair<float, float> > ScoreMap;
+```
+
+```C++
+// CategoryType -> (score, weight)
+typedef hash_map<int, pair<float, float> > ScoreMap;
+```
+
+前者でも読めるが、後者の方がコンパクトで更に読みやすい。
+
+### Avoid Ambiguous Pronouns
+
+英語だとitに相当するような曖昧な代名詞はコメントに含めないようにすべき。
+
+``// Insert the data into the cache, but check if it's too big first.`` ( ... if it's ... )よりも``// Insert the data into the cache, but check if the data is too big first``( ... if the data ... )のように明確な語を使うべき。
+
+### Polish Sloppy Sentences
+
+``# Depending on whether we've already crawled this URL before, give it a different priority.``のような複雑な文よりは``# Give higher priority to URLs we've never crawled before.``のようにシンプルな方がいい。
+
+### Describe Function Behavior Precisely
+
+「文字数を返す」と言った場合、"hello\nC++"はどういう風になるのか…といった解釈が複数出てきそうなこめんとではなく、「改行(\n)までの文字数を返す」というような明確な文にすべき。
+
+### Use Input/Output Examples That Illastrate Corner Cases
+
+``// Example: Strip("abba/a/ba", "ab") returns "/a/"``のように入力と出力の例を提示するとなおいい。
+
+
+### State the Intent of Your Code
+
+コードの意図を書くべき。たとえば``// 配列を先端から末端までをfor文で見る``ではなく``// 配列に入っている数字の最大値と最小値を計算する``といったコメントにすべき。
+
+### "Named Function Parameter" Comments
+
+Pythonのような言語なら``Connect(timeout = 10, use_encryption = False)``のように名前付き引数を用いて、  
+C++のような言語なら``Connect(/* timeout_ms = */ 10, /* use_encryption = */ false);``のようにコメントで明示するとわかりやすい。
+ただしこの方法を用いるのなら**各引数の直前**にコメントを置くべき。
+
+### Use Information-Dense Words
+
+できる限り少ない語で意味を形成する語を用いるべき。
