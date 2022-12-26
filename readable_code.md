@@ -484,3 +484,42 @@ C++のような言語なら``Connect(/* timeout_ms = */ 10, /* use_encryption = 
 #### Use Information-Dense Words
 
 できる限り少ない語で意味を形成する語を用いるべき。
+
+## Part 2. Simplifying Loops and Logic
+
+### 7. Making Control Flow Easy to Read
+
+> Make all your condtionals, loops, and other changes to control flow as "natural" as possible - written in a way that doesn't make the reader stop and reread your code.
+> [訳] 条件式、ループ文、その他の制御系を読む人が思考停止しないようにできる限り「自然なカタチ」にすべきである。
+
+#### The Order of Arguments in Conditionals
+
+当書ではif文等での条件式は「**左側に流動的な値を、右側に固定的な値を置くと可読性が上がる**」と提案している。
+つまり、左側に変数のような値が変わるものを、右側に定数といったようなものが望ましいとしている。
+
+#### Th Order of if/else Blocks
+
+if...else文は
+
+- 基本的にはポジティブな条件式を先に持ってくるべき。e.g.``if( !debug )``。
+- 基本的にはシンプルな方を先に持ってくるべき。
+- 関心がもっとも強いものや目立つものを先に持ってくるべき。
+
+としている。
+
+#### The ?:Conditional Expression (a.k.a "Ternary Operator")
+
+三項演算子は「結果がAかBか」のようなシンプルな場合に用いるべき。条件式が複雑な場合は使うべきではない。
+
+> Instead of minimizing the number of lines, a better metric is to minimize the time needed for someone to understand it.
+> [訳] 行数を削るよりも他人が読む(ために必要な)時間を減らすのが最もいい方法である。
+
+
+> By default, use an if/else. The ternay ?: should be used only for the simplest cases.
+> [訳] 基本的にはif...else文を用いるべきである。三項演算子はシンプルな場合だけとする。
+
+#### Avoid do/while Loops
+#### Returning Early from a Function
+#### The infamous goto
+#### Minimize Nesting
+#### Can You Follow the Flow fof Execution?
