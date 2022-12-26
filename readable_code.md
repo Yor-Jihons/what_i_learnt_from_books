@@ -4,7 +4,7 @@
 
 ## Chapter 1. Code Should Be Easy to Understand
 
-### What Makes Code "Better"? (「いい」コードとは? )
+#### What Makes Code "Better"? (「いい」コードとは? )
 
 コード量が少ないと可読性が上がりやすいが、内容次第では逆に可読性が悪くなることがある。
 
@@ -13,7 +13,7 @@
 
 そのため、適切にその都度「最善だと思われれるコード」を選択すべきである。
 
-### The Fundamental Theorem of Readability ( 可読性の基本定理 )
+#### The Fundamental Theorem of Readability ( 可読性の基本定理 )
 
 > Code should be written to minimize the time it would take for someone else to understand it.
 > [訳]コードは他者がすぐに理解できるように書くべきである
@@ -21,18 +21,18 @@
 開発から保守まで一人で行うことは稀で、基本的には複数人でやることが多い。そのため、同じチームの人間が読んでもすぐに理解できるコードを書くべきである。
 理解するのにかかる時間が短ければ短いほどいいとされている。個人開発の場合であっても六か月後の自分はもはや他人である。
 
-### Is smaller Always Better? ( 短いコードは絶対にいいコードなのか? )
+#### Is smaller Always Better? ( 短いコードは絶対にいいコードなのか? )
 
 コードは基本的に短い(行数が少ない)方が望ましいが、必ずしも短いほどいいわけではない。
 当書にあるサンプルとして``assert((!(bucket = FindBucket(key))) || !bucket->IsOccupied());``と``bucket = FindBucket(key); if (bucket != NULL) assert(!bucket->IsOccupied());`` で比較している。
 前者では確かに行数は少ないが読んで理解するのにやや時間がかかる。しかし後者は行数としては多いが比較的理解しやすいものとなっている。
 よって「必ず短い方がいい」とは言えないのだ。
 
-### Does Time-Till-Understanding Conflict with Other Goals?
+#### Does Time-Till-Understanding Conflict with Other Goals?
 
 このリーダブルな発想は他のアーキテクチャやテスト技法といったものと相容れないかと思われることもあるが、むしろその逆でリーダブルなコードであればテストもしやすくなる。
 
-### The hard Part
+#### The hard Part
 
 たとえ単独で開発していても他者が読むこと想定して名前を付けていくことが望ましい。
 
@@ -484,4 +484,3 @@ C++のような言語なら``Connect(/* timeout_ms = */ 10, /* use_encryption = 
 #### Use Information-Dense Words
 
 できる限り少ない語で意味を形成する語を用いるべき。
-
