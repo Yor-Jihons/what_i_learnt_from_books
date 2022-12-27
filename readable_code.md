@@ -519,7 +519,19 @@ if...else文は
 > [訳] 基本的にはif...else文を用いるべきである。三項演算子はシンプルな場合だけとする。
 
 #### Avoid do/while Loops
+
+do...while文は上から下に読んで条件式を確認し、さらに上に戻る…といった二度手間になるため**避けるべき**。
+
 #### Returning Early from a Function
+
+例外的なエラーは最初で行うべき。
+
 #### The infamous goto
+
+基本的にgotoは使うべきではないが、「**例外的なエラーによる後処理**」の場合のみ有用。
+
 #### Minimize Nesting
-#### Can You Follow the Flow fof Execution?
+
+入れ子はできる限り少なくするべき。
+
+
