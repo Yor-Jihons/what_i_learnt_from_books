@@ -534,4 +534,45 @@ do...while文は上から下に読んで条件式を確認し、さらに上に�
 
 入れ子はできる限り少なくするべき。
 
+### 8. Breaking Down Giant Expressions
+
+> Break down your giant expressions into more digestible pieces.
+> [訳] 巨大な表現をより消化しやすい断片に分解せよ。
+
+#### Explaining Variables
+
+``if line.split(':')[0].strip() == "root":``のような条件式だと読むのに苦労するため、一旦条件式を変数に入れて可読性を上げるべき。
+
+#### Summary Variables
+
+Explaining Variablesに近いが、こちらは``if( data.id == parent.id )``のような条件式を変数に入れる。
+
+#### Using De Morgan' Laws
+
+ド・モルガンの法則を使って条件式をシンプルにするべき。
+
+#### Abusing Short-Circuit Logic
+
+``assert((!(bucket = FindBucket(key))) || !bucket->IsOccupied());``
+
+と
+
+```
+bucket = FindBucket(key);
+if (bucket != NULL) assert(!bucket->IsOccupied());
+```
+
+では前者がいい。つまり条件式をわざわざ難しくする必要はない。
+
+> Beware of “clever” nuggets of code — they’re often confusing when others read the code later.
+> [訳] 小難しいコードの断片に気を付けよ。後から読むときに混乱をもたらすことがあるためだ。
+
+##### Finding a More Elegant Approach
+
+「先頭から考える」のは「末尾から考える」という風に言い換えることができる。そういう対偶や逆を使った処理を考えるのも手。
+
+#### Breaking Down Giant Statements
+
+
+#### Another Creative Way to Simplify Expressions
 
