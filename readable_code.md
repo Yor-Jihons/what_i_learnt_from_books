@@ -487,7 +487,7 @@ C++のような言語なら``Connect(/* timeout_ms = */ 10, /* use_encryption = 
 
 ## Part 2. Simplifying Loops and Logic
 
-### 7. Making Control Flow Easy to Read
+### Chapter 7. Making Control Flow Easy to Read
 
 > Make all your condtionals, loops, and other changes to control flow as "natural" as possible - written in a way that doesn't make the reader stop and reread your code.
 > [訳] 条件式、ループ文、その他の制御系を読む人が思考停止しないようにできる限り「自然なカタチ」にすべきである。
@@ -534,7 +534,7 @@ do...while文は上から下に読んで条件式を確認し、さらに上に�
 
 入れ子はできる限り少なくするべき。
 
-### 8. Breaking Down Giant Expressions
+### Chapter 8. Breaking Down Giant Expressions
 
 > Break down your giant expressions into more digestible pieces.
 > [訳] 巨大な表現をより消化しやすい断片に分解せよ。
@@ -571,8 +571,114 @@ if (bucket != NULL) assert(!bucket->IsOccupied());
 
 「先頭から考える」のは「末尾から考える」という風に言い換えることができる。そういう対偶や逆を使った処理を考えるのも手。
 
-#### Breaking Down Giant Statements
-
-
 #### Another Creative Way to Simplify Expressions
+
+```C++
+void AddStats(const Stats& add_from, Stats* add_to) {
+ add_to->set_total_memory(add_from.total_memory() + add_to->total_memory());
+ add_to->set_free_memory(add_from.free_memory() + add_to->free_memory());
+ add_to->set_swap_memory(add_from.swap_memory() + add_to->swap_memory());
+ add_to->set_status_string(add_from.status_string() + add_to->status_string());
+ add_to->set_num_processes(add_from.num_processes() + add_to->num_processes());
+ ...
+}
+```
+
+というコードは``add_to->set_XXX(add_from.XXX() + add_to->XXX());``が共通しているため、これを関数化するなりマクロ化するなりして、
+
+```C++
+void AddStats(const Stats& add_from, Stats* add_to) {
+ // マクロ化
+ #define ADD_FIELD(field) add_to->set_##field(add_from.field() + add_to->field())
+
+ // マクロを呼び出して可読性を上げる
+ ADD_FIELD(total_memory);
+ ADD_FIELD(free_memory);
+ ADD_FIELD(swap_memory);
+ ADD_FIELD(status_string);
+ ADD_FIELD(num_processes);
+ ...
+ #undef ADD_FIELD
+}
+```
+
+というように可読性を上げるべき。
+
+### Chapter 9. Variables and Readability
+
+#### Eliminating Variables
+
+ここでは今までの反対で、「アンチパターン」的な変数の使い方を示して反面教師にする。
+
+##### Useless Temporary Variables
+
+```Python
+now = datetime.datetime.now()
+root_message.last_view_time = now
+```
+
+上記のコードだと``datetime.datetime.now()``は複雑でもないし可読性が悪いわけでも無い。
+その値を別のところで利用するわけでもないのなら不必要な変数となる。
+
+##### Eliminating Intermediate Results
+
+一括でまとめて一回で処理できる場合は変数を用意する必要がない。
+
+```JavaScript
+var remove_one = function (array, value_to_remove) {
+ var index_to_remove = null;
+ for (var i = 0; i < array.length; i += 1) {
+    if (array[i] === value_to_remove) {
+    index_to_remove = i;
+    break;
+    }
+ }
+ if (index_to_remove !== null) {
+    array.splice(index_to_remove, 1);
+ }
+};
+```
+
+上記のコードでは「削除する位置を見つけたら、削除してそのまま返す」とすればindex_to_removeという変数は不要。
+
+```JavaScript
+var remove_one = function (array, value_to_remove) {
+ for (var i = 0; i < array.length; i += 1) {
+    if (array[i] === value_to_remove) {
+       array.splice(i, 1);
+    return;
+   }
+ }
+};
+```
+
+##### Eliminating Control Flow Variables
+
+while文のようなループ文でフラグの状態でループさせたりする場合があるが、その場合はフラグを使うべきではない。
+
+```
+boolean done = false;
+while (/* condition */ && !done) { // <= これと
+ ...
+ if (...) {
+ done = true; // <= これ
+ continue;
+ }
+}
+```
+↓
+```
+while (/* condition */) {
+ ...
+ if (...) {
+ break;
+ }
+}
+```
+
+#### Shrink the Scope of Your Variables
+
+#### Prefer Write-Once Variables
+
+#### A Final Example
 
