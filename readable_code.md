@@ -678,6 +678,78 @@ while (/* condition */) {
 
 #### Shrink the Scope of Your Variables
 
+> Make your variable visible by as few lines of code as possible.
+> [訳] 変数の見える範囲はできる限り、数行程度におさえるべきである。
+
+簡単に言えば「スコープは小さくしろ」ということ。
+
+##### if Statement Scope in C++
+
+```C++
+PaymentInfo* info = database.ReadPaymentInfo();
+if (info) {
+ cout << "User paid: " << info->amount() << endl;
+}
+
+// Many more lines of code below ...
+```
+
+のように書くと、infoオブジェクトはif文以降も使うと解釈されがちなので、
+
+```C++
+if (PaymentInfo* info = database.ReadPaymentInfo()) {
+ cout << "User paid: " << info->amount() << endl;
+}
+```
+
+のように一括でやるべき。
+
+##### Creating "Private" Variables in JavaScript
+
+```JavaScript
+ubmitted = false; // Note: global variable
+// ※ ただしsubmit_form関数からしか使われない(可能性)
+
+
+var submit_form = function (form_name) {
+ if (submitted) {
+  return; // don't double-submit the form
+ }
+ ...
+ submitted = true;
+};
+```
+のようにグローバル変数を使ってやるぐらいなら
+
+```JavaScript
+var submit_form = (function () {
+ var submitted = false; // Note: can only be accessed by the function below
+ return function (form_name) {
+  if (submitted) {
+   return; // don't double-submit the form
+  }
+  ...
+  submitted = true;
+ };
+}());
+```
+
+のようにprivateな変数として使うべき。
+
+##### JavaScript Global Scope
+
+JavaScriptでの変数は必ず var を付けるべき。(現在だとletとかもあるが)
+
+##### No Nested Scope in Python and JavaScript
+
+Pythonのような動的型付けの言語だと変数宣言がない。(あってもvarのような必須とは言えないような仕様)
+そのためバグが出やすい。たとえば初期化していない変数を表示しようとした場合とか。
+そういう言語を使う場合は変数宣言として``num = None``のように初期化した状態で宣言するべき。
+
+##### Moving Definitions Down
+
+変数は使う直前で宣言すべき。
+
 #### Prefer Write-Once Variables
 
 #### A Final Example
