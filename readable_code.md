@@ -752,5 +752,30 @@ Pythonのような動的型付けの言語だと変数宣言がない。(あっ�
 
 #### Prefer Write-Once Variables
 
-#### A Final Example
+値が一度だけしか変わらない(設定されない)場合はconstやfinalを付けて定数として明示するのがベター。
+言語によってはイミュータブルなものとする。
+
+> The more places a variable is manipulated, the harder it is to reason about its current value.
+> [訳] 変数が操作される場所が増えるほど、現在の値を判断するのが難しくなる。
+
+
+## Part 3. Reorganizing Your Code
+
+### Chapter 10. Extracting Unrelated Subproblems
+
+#### Introductory Example: findClosestLocation()
+
+メインの処理から考えて、「計算に必要な値を別途計算する」というようなサブ処理は関数化(メソッド化)したりして切り出すべき。
+
+#### Create a Lot of General-Purpose Code
+
+Util/****.cpp のようなユーティリティ系APIとして切り出しておくと、他のコードからも呼び出せるし保守も容易になる。
+
+#### Simplifying an Existing Interface
+
+複雑な処理ならラッパー関数のような感じで間接的に呼び出すように心がけよ。(ライブラリとして公開する場合)
+
+#### Taking Things Too Far
+
+余計な処理は付けるな。
 
