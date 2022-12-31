@@ -779,3 +779,46 @@ Util/****.cpp のようなユーティリティ系APIとして切り出してお
 
 余計な処理は付けるな。
 
+### Chapter 11. One Task at a Time
+
+>> Code should be organized so that it's doing only one task at a time.
+>> [訳] コードは一度に一つのタスクだけを処理するような書き方にすべきである。
+
+### Chapter 12. Turning Throughts into Code
+
+#### Describing Logic Clearly
+
+ロジックは読みやすくすべき。
+
+### Chapter 13. Writing Less Code
+
+> The most readable code is no code at all.
+> [訳] 最も読みやすいコードとは「書かないこと」である。
+
+#### Don't Bother Implementing That Feature - You Won't Need It
+
+YAGNIの原則。必要なときに実装すべき。不要な実装はするな。
+
+#### Question and Break Down Your Requirements
+
+デザインパターンのFlyWeightパターンのようにメモリ上に配置するなりしてコードを省略化できるようにすべき。
+
+#### Keeping Your Codebase Small
+
+プロジェクトは常に最小であるべき。
+
+- 重複しているコードはUtilityとして切り出す
+- 不要なコードはを削除する
+- サブプロジェクトとは切り離すことができるようにしておく
+- サイズを最小限にすること
+
+#### Be Familiar with the Libraries Around You
+
+C++のSTL等のようなライブラリを利用する。
+
+#### Example: Using Unix TOols Instead of Coding
+
+コーディングするぐらいならUNIX由来のツールを使うべき。
+
+
+
