@@ -820,5 +820,40 @@ C++のSTL等のようなライブラリを利用する。
 
 コーディングするぐらいならUNIX由来のツールを使うべき。
 
+## Part 4. Selected Topics
 
+### Chapter 14. Testing and Readability
 
+#### Make Tests Easy to Read and Maintain
+
+> Test code should be readable so that other coders are comfortable changing or adding tests.
+> [訳] テストコードは他人が簡単に変更や追加ができるように可読性を上げるべきである。
+
+#### Making This Test More Readable
+
+ヘルパー関数のようなものを作って可読性を上げるべき。
+
+#### Making Error Messages Reable
+
+TypeScriptのテストのようにExpected OutputとActual Outputがわかるようなエラーメッセージにすべき。
+
+#### Choosing Good Test Inputs
+
+> In general, you should pick the simplest set of inputs that completely exercise the code.
+> [訳] 一般的に、きれいに演算されるシンプルな値を入力値とすべきである。
+
+##### Simplifying the Input Values
+
+> Prefer clean and simple test values that still get the job done.
+> [訳] タスクをやり遂げるシンプルでクリーンな値を用いるべきである。
+
+#### Naming Test Functions
+
+``void Test1()``のような名前ではなく、``void Test_SortAndFilterDocs()``のように``Test_{テスト対象のAPI名}``のような名前にすべき。
+
+#### Summary
+
+- 各テストのトップレベルはできるだけ簡潔にする必要がある。理想的には、各テスト入力/出力を1行のコードで記述する。
+- テストが失敗した場合は、バグを簡単に追跡できるエラーメッセージを出力し、そして修正する。
+- 耐えうる最もシンプルな入力値を用いるべき。
+- `` Test_<FunctionName>_<Situation>``のようなわかりやすいテスト名にすべき。
