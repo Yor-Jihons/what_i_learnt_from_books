@@ -857,3 +857,27 @@ TypeScriptのテストのようにExpected OutputとActual Outputがわかるよ
 - テストが失敗した場合は、バグを簡単に追跡できるエラーメッセージを出力し、そして修正する。
 - 耐えうる最もシンプルな入力値を用いるべき。
 - `` Test_<FunctionName>_<Situation>``のようなわかりやすいテスト名にすべき。
+
+### Chapter 15. Designing and Implementing a "Minute/Hour Counter"
+
+#### The Problem
+#### Defining the Class Interface
+```C++
+// Add a count
+void Add(int count);
+// Return the count over this minute
+int MinuteCount();
+```
+
+よりも
+
+```C++
+// Add a new data point (count >= 0).
+// For the next minute, MinuteCount() will be larger by +count.
+// For the next hour, HourCount() will be larger by +count.
+void Add(int count);
+// Return the accumulated count over the past 60 seconds.
+int MinuteCount();
+```
+
+のようなコメントの方が望ましい。
