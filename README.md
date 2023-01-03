@@ -4,11 +4,10 @@
 
 ## 一冊目: 情熱プログラマー ソフトウェア開発者の幸せな生き方
 
-この本は玄人指向のプログラマになるためには何をすべきかということを伝えてくれる。
+この本は玄人指向のプログラマになるためには何をすべきかということを伝えてくれる。  
 See [here](./passionate_programmer.md) and [here](./what_passionate_programmer_taught_me.md).
 
 ## 二冊目: リーダブルコード
 
-この本は「いかにしてコードを書くべきか」ということに焦点をあてたものである。
-See [here](./readable_code.md).
-
+この本は「いかにしてコードを書くべきか」ということに焦点をあてたものである。  
+See [here](./readable_code.md) and [here](./what_readable_code_taught_me.md).
