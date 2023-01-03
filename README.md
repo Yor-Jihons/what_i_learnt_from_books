@@ -5,7 +5,7 @@
 ## 一冊目: 情熱プログラマー ソフトウェア開発者の幸せな生き方
 
 この本は玄人指向のプログラマになるためには何をすべきかということを伝えてくれる。
-See [here](./passionate_programmer.md).
+See [here](./passionate_programmer.md) and [here](./what_passionate_programmer_taught_me.md).
 
 ## 二冊目: リーダブルコード
 
